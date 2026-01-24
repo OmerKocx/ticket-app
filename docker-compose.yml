@@ -1,22 +1,18 @@
 services:
-  # Our PostgreSQL database
   db:
-    # Using the latest PostgreSQL image
-    image: postgres:latest
+    image: postgres:18.1
     ports:
       - "5432:5432"
     restart: always
     environment:
-      POSTGRES_PASSWORD: sprtk178op
+      POSTGRES_PASSWORD: [ PASSWORD ]
 
-  # Database management interface
   adminer:
     image: adminer:latest
     restart: always
     ports:
       - "8888:8080"
 
-  # Keycloak service
   keycloak:
     image: quay.io/keycloak/keycloak:latest
     ports:
