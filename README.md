@@ -17,26 +17,7 @@ A robust RESTful API built on Spring Boot for managing and validating event tick
 
 ## Environment Configuration
 
-Configuration is managed via the environment variables defined in the `.env` file in the root directory:
-
-```properties
-# Database Settings
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=postgres
-DB_USERNAME=postgres
-DB_PASSWORD=devpassword
-DB_SCHEMA=ticket
-
-# Tool Settings
-ADMINER_PORT=8888
-
-# Keycloak Settings
-KEYCLOAK_PORT=9090
-KEYCLOAK_ADMIN=admin
-KEYCLOAK_ADMIN_PASSWORD=admin
-KEYCLOAK_ISSUER_URI=http://localhost:9090/realms/event-ticket-platform
-```
+Configuration is managed via the environment variables defined in the `.env` file in the root directory.
 
 ---
 
