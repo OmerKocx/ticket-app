@@ -1,4 +1,5 @@
 package com.omerkoc.tickets.services.impl;
+
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
@@ -44,8 +45,7 @@ public class EventServiceImpl implements EventService {
   public Event createEvent(UUID organizerId, CreateEventRequest event) {
     User organizer = userRepository.findById(organizerId)
         .orElseThrow(() -> new UserNotFoundException(
-            String.format("User with ID '%s' not found", organizerId))
-        );
+            String.format("User with ID '%s' not found", organizerId)));
 
     Event eventToCreate = new Event();
 
@@ -97,8 +97,7 @@ public class EventServiceImpl implements EventService {
     Event existingEvent = eventRepository
         .findByIdAndOrganizerId(id, organizerId)
         .orElseThrow(() -> new EventNotFoundException(
-            String.format("Event with ID '%s' does not exist", id))
-        );
+            String.format("Event with ID '%s' does not exist", id)));
 
     existingEvent.setName(event.getName());
     existingEvent.setStart(event.getStart());
@@ -114,9 +113,8 @@ public class EventServiceImpl implements EventService {
         .filter(Objects::nonNull)
         .collect(Collectors.toSet());
 
-    existingEvent.getTicketTypes().removeIf(existingTicketType ->
-        !requestTicketTypeIds.contains(existingTicketType.getId())
-    );
+    existingEvent.getTicketTypes()
+        .removeIf(existingTicketType -> !requestTicketTypeIds.contains(existingTicketType.getId()));
 
     Map<UUID, TicketType> existingTicketTypesIndex = existingEvent.getTicketTypes().stream()
         .collect(Collectors.toMap(TicketType::getId, Function.identity()));
@@ -141,8 +139,7 @@ public class EventServiceImpl implements EventService {
         existingTicketType.setTotalAvailable(ticketType.getTotalAvailable());
       } else {
         throw new TicketTypeNotFoundException(String.format(
-            "Ticket type with ID '%s' does not exist", ticketType.getId()
-        ));
+            "Ticket type with ID '%s' does not exist", ticketType.getId()));
       }
     }
 
